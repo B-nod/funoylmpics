@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% include 'preloader.html' %}
+
+{% block title %} Category Video {% endblock title %}
+
+{% block content %}
+
+<div class="hero overlay" style="background-image: url('/static/images/bg_3.jpg');">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 ml-auto">
+        <h1 class="text-white">{{blog.title}}</h1>
+        <h2 class="text-white bold">{{blog.category.title}}</h2>
+
+        <!-- <p>{{blog.descriptions}}</p> -->
+        
+    </div>  
+  </div>
+</div>
+<section class="blog-posts grid-system ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="all-blog-posts">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="blog-post">
+                  <div class="blog-thumb">
+                    <!-- <iframe src="{{blog.video.url}}" title="{{blog.title}}" allowfullscreen></iframe> -->
+                    <video class="embed-responsive embed-resposive-16by9" controls="controls" >
+                        <source src="{{blog.video.url}}" type="video/mp4" />
+                      </video>
+                  </div>
+                  <div class="down-content">
+                    <!-- <span>{{blog.category.title}}</span>
+                    <a href="post-details.html"><h4>{{blog.title}}</h4></a> -->
+                   
+                    <p>{{blog.descriptions}}</p>
+                    <ul class="post-info">
+                      <li><a href="javascript:void(0);">{{blog.user.username}}</a></li>
+                      <li><a href="javascript:void(0);">{{blog.posted_date}}</a></li>
+                      <li><a href="javascript:void(0);">{{blog.blog_comments.all.count}} Comments</a></li>
+                  </ul>
+                    <div class="post-options">
+                      <div class="row">
+                        <div class="col-6">
+                          
+                        </div>
+
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="sidebar-item comments">
+                  <div class="sidebar-heading">
+                    <h2>{{blog.blog_comments.all.count}} comments</h2>
+                  </div>
+                  <div class="content">
+                    <ul class = 'd-flex flex-column'>
+                      {% for comment in blog.blog_comments.all %}
+                      <li>
+                        <div class="author-thumb">
+                          <img src="{{comment.user.get_profile_picture}}" alt="">
+                        </div>
+                        <div class="right-content">
+                          <h4>{{comment.user.username}}<span>{{comment.created_date}}</span></h4>
+                          <p>{{comment.text}}</p>
+                          <form id="comment" action="{% url 'add_reply' blog.id comment.id %}" method="post" class = "submit-reply">
+                            {% csrf_token %}
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <fieldset>
+                                  <textarea name="text" rows="2" cols ="10" id="message" placeholder="Type your Reply" required=""></textarea>
+                                </fieldset>
+                              </div>
+                              <div class="col-lg-12">
+                                <fieldset>
+                                  {% if request.user.is_authenticated %}
+                                  <button type="submit" id="form-submit" class="main-button">Reply</button>
+                                  {% else %}
+                                  <a href="{% url 'login' %}" id="form-submit" class="main-button">Log in to Reply</a>
+                                  {% endif %}
+                                </fieldset>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </li>
+                      {% for reply in comment.comment_replies.all %}
+                      <li class="replied">
+                        <div class="author-thumb">
+                          <img src="{{reply.user.get_profile_picture}}" alt="">
+                        </div>
+                        <div class="right-content">
+                          <h4>{{reply.user.username}}<span>{{reply.created_date}}</span></h4>
+                          <p>{{reply.text}}</p>
+                        </div>
+                      </li>
+                      {% endfor %}
+                      {% endfor %}
+                      
+                     
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="sidebar-item submit-comment">
+                  <div class="sidebar-heading">
+                    <h2>Your comment</h2>
+                  </div>
+                  <div class="content">
+                    <form id="comment" action="{% url 'blogdetails' blog.slug %}" method="post">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <fieldset>
+                            <textarea name="text" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                          <fieldset>
+                            {% if request.user.is_authenticated %}
+                            <button type="submit" id="form-submit" class="main-button">Submit</button>
+                            {% else %}
+                            <a href="{% url 'login' %}" id="form-submit" class="main-button">Log in to Comment</a>
+                            {% endif %}
+                          </fieldset>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar -->
+        <div class="col-lg-4">
+          <div class="sidebar">
+            <div class="row">
+              
+              <div class="col-lg-12">
+                <div class="sidebar-item recent-posts">
+                  <div class="sidebar-heading">
+                    <h2>Related Posts</h2>
+                  </div>
+                  <div class="content">
+              {% for blog in related_blogs|slice:"3" %}
+      
+                    <ul>
+                      <li><a href="{% url 'blogdetails' blog.slug %}">
+                        <h5>{{blog.title}}</h5>
+                        <span>{{blog.posted_date}}</span>
+                      </a></li>
+                      
+                    </ul>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            
+              <div class="col-lg-12">
+                <div class="sidebar-item tags">
+                  <div class="sidebar-heading">
+                    <h2>Cateories</h2>
+                  </div>
+                  <div class="content">
+                    <ul>
+                      {% for category in categories %}
+      
+                      <li><a href="{% url 'categoryvideo' category.slug %}">{{category.title}}</a></li>
+                      {% endfor %} 
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
+{% block scripts %}
+
+<script src="{% static 'js/like_blog.js' %}"></script>
+
+{% endblock scripts %}

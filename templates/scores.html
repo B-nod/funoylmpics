@@ -1,0 +1,37 @@
+<div class="container">
+    {% load static %}
+      
+
+    <div class="row">
+      {% for score in scores|slice:"1" %}
+
+      <div class="col-lg-12">
+        
+        <div class="d-flex team-vs">
+          <span class="score">{{score.score_a}}-{{score.score_b}}</span>
+          <div class="team-1 w-50">
+            <div class="team-details w-100 text-center">
+              <img src="{{score.country_a.get_country_picture}}" alt="Image" class="img-fluid">
+              <h3>{{score.country_a}}</h3>
+              <ul class="list-unstyled">
+                <li></li>
+               
+              </ul>
+            </div>
+          </div>
+          <div class="team-2 w-50">
+            <div class="team-details w-100 text-center">
+              <img src="{{score.country_b.get_country_picture}}" alt="Image" class="img-fluid">
+              <h3>{{score.country_b}}</h3>
+              <ul class="list-unstyled">
+                <li></li>
+              
+              </ul>
+            </div>
+            
+{% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

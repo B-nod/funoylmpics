@@ -1,0 +1,33 @@
+
+               
+{% load static %}
+
+
+                <div class="col-lg-6">
+                  
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <img src="{{blog.banner.url}}" alt="{{blog.title}}" class="img-fluid">
+                    </div>
+                    <div class="down-content">
+                      <span>{{blog.category.title}}</span>
+                      {% if request.user.is_authenticated %}
+                      <a href="{% url 'blogdetails' blog.slug %}">
+                        <h3 class="mb-3">{{blog.title}}</h3>
+                        </a>
+                      {% else %}
+                      <a href="{% url 'login' %}">
+                        <h3 class="mb-3">{{blog.title}}</h3>
+                        </a>
+                      {% endif %}
+                      
+                      <ul class="post-info">
+                        <li><a href="#">{{blog.user.username}}</a></li>
+                        <li><a href="#">{{blog.posted_date}}</a></li>
+                        <li><a href="#">{{blog.blog_comments.all.count}} Comments</a></li>
+                      </ul>
+                      <p>{{blog.descriptions|truncatewords:10}}</p>
+                     
+                    </div>
+                  </div>
+                </div>

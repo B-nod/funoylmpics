@@ -1,0 +1,71 @@
+{% load static %}
+
+
+
+    <div class="col-lg-6 mb-4">
+        <div class="bg-light p-4 rounded">
+          <div class="widget-body">
+              <div class="widget-vs">
+                <div class="d-flex align-items-center justify-content-around justify-content-between w-100">
+                  <div class="team-1 text-center">
+                    <img src="{{score.country_a.get_country_picture}}" alt="Image" style="width:90px; height:70px; padding:2px; margin:5px;">
+                    <h3>{{score.country_a}}</h3>
+                    <p>{{score.score_a}}</p>
+
+                  </div>
+                  <div>
+                    <span class="vs"><span>VS</span></span>
+                  </div>
+                  <div class="team-2 text-center">
+                    <img src="{{score.country_b.get_country_picture}}" alt="Image" style="width:90px; height:70px; padding:2px; margin:5px;">
+                    <h3>{{score.country_b}}</h3>
+                    <p>{{score.score_b}}</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center widget-vs-contents mb-4">
+              <h4>{{score.category}}</h4>
+              <!-- <p class="mb-5">
+                <!-- <span class="d-block">December 20th, 2020</span> 
+                <span class="d-block">9:30 AM GMT+0</span>
+                <!-- <strong class="text-primary">New Euro Arena</strong> 
+              </p> -->
+
+            </div>
+          
+        </div>
+      
+    
+  </div>
+
+<!-- 
+                <div class="col-lg-4">
+                    <div class="downn-content border m-3 p-5 text-center">
+                    <h4 style="color: #f48840;" >{{score.category}}</h4>
+                <hr>
+                    <div class="row">
+                        <div class="col-sm-6 text-center">
+                            <div class="down-content"> 
+                                <h4>{{score.country_a}}</h4>
+                                <p>{{score.score_a}}</p>
+                                </div> 
+                        </div>
+                        <div class="col-sm-6 text-center">
+                            <div class="down-content"> 
+                                <h4>{{score.country_b}}</h4>
+                                <p>{{score.score_b}}</p>
+                            </div> 
+                        </div>
+
+                    </div>
+                                    
+                    </div>
+                </div> -->
+                
+
+
+                  
+                

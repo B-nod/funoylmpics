@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% include 'preloader.html' %}
+
+{% block title %} Profile {% endblock title %}
+
+{% block content %}
+
+<br>
+<br>
+
+
+
+<section class="mt-50 profile ">
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img src="{{request.user.get_profile_picture}}" alt="" class="rounded rounded-circle profile-picture mb-4 ">
+                    <div class="text-content mb-5">
+                        <h4 >{{user.username}}</h4>
+                        <h6>{{user.email}}</h6>
+
+                        
+          
+                      </div>
+                      <a type="submit" id="form-submit" class="main-button btn-primary" href="{% url 'profilechange' %}">Edit Profile </a>
+                      <a type="submit" id="form-submit" class="main-button btn-primary" href="{% url 'change_password' %}">Change Password </a>
+
+
+                    
+                </div>
+                </div>
+              
+            <div class="col-md-6 ">
+                
+                <div class="text-content">
+                    <!-- <form action="{% url 'profile' %}" method = "POST" class = "px-5">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <div class="col-md-12 col-sm-12">
+                              {% include 'message.html' %}
+                            </div>
+                        {% endif %}
+
+                        {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                        <div class="alert">
+                            <p class="text-danger">{{error}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %} -->
+
+
+                        <div class="form-group">
+                            <label for="firstname">First Name :</label>
+                            <p>{{account.first_name}}</p>
+                            <!-- <input type="text" class="form-control" name = "first_name" value = "{{account.first_name}}"> -->
+                            <!-- <p class = "py-1 text-danger error">{{form.first_name.errors}}</p> -->
+
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Last Name :</label> 
+                            <p>{{account.last_name}}</p>
+
+                            <!-- <input type="text" class="form-control" name = "last_name" value = "{{account.last_name}}">
+                            <p class = "py-1 text-danger error">{{form.last_name.errors}}</p> -->
+
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username :</label>
+                            <p>{{account.username}}</p>
+
+                            <!-- <input type="text" class="form-control" name = "username" value = "{{account.username}}">
+                            <p class = "py-1 text-danger error">{{form.username.errors}}</p> -->
+
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email :</label>
+                            <p>{{account.email}}</p>
+<!-- 
+                            <input type="email" class="form-control" name = "email" value = "{{account.email}}">
+                            <p class = "py-1 text-danger error">{{form.email.errors}}</p> -->
+
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country :</label>
+                            <p>{{account.country}}</p>
+<!-- 
+                            <input type="email" class="form-control" name = "email" value = "{{account.email}}">
+                            <p class = "py-1 text-danger error">{{form.email.errors}}</p> -->
+
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="new_password">Password</label>
+                            <input type="password" class="form-control" name = "new_password" >
+                            <p class = "py-1 text-danger error">{{form.new_password.errors}}</p>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">New Password</label>
+                            <input type="password" class="form-control" name = "confirm_password">
+                            <p class = "py-1 text-danger error">{{form.confirm_password.errors}}</p>
+
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <button type="submit" id="form-submit" class="main-button btn-primary">Update</button>
+                        </div> -->
+                        
+                    <!-- </form> -->
+                    
+      
+                  </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock content %}
+

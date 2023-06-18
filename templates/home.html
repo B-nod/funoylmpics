@@ -1,0 +1,72 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% include 'preloader.html' %}
+
+
+{% block title %} Fun Olympics {% endblock title %}
+
+{% block content %}
+
+{% include 'banner.html' %}
+
+{% include 'scores.html' %}
+
+
+    <!-- <div class="row no-gutters"> -->
+
+        <div class="latest-news">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 title-section">
+                  <h2 class="heading">Latest News</h2>
+                </div>
+              </div>
+              <div class="row no-gutters">
+              {% for blog in blogs|slice:"3" %}
+
+                <div class="col-md-4">
+                  <div class="post-entry">
+                
+                     
+                      <img src="{{blog.banner.url}}" alt="Image" class="img-fluid">
+                   
+                    <div class="caption">
+                      <div class="caption-inner">
+                      {% if request.user.is_authenticated %}
+
+                        <a href="{% url 'blogdetails' blog.slug %}">
+                          <h3 class="mb-3">{{blog.title}}</h3>
+                          </a>
+                        {% else %}
+                        <a href="{% url 'login' %}">
+                          <h3 class="mb-3">{{blog.title}}</h3>
+                          </a>
+                        {% endif %}
+                        
+                        <div class="author d-flex align-items-center">
+                          <div class="img mb-2 mr-3">
+                            <img src="{{request.user.get_profile_picture}}" alt="">
+                          </div>
+                          <div class="text">
+                            <h4>{{blog.username}}</h4>
+                            <span>{{blog.category.title}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+                {% endfor %}
+                
+              </div>
+      
+            </div>
+          </div>
+<!-- </div> -->
+
+
+ 
+
+{% endblock content %}
